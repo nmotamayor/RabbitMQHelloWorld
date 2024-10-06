@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.rabbitmq:amqp-client:5.16.0'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+}
+
+application {
+    // Default main class (optional, can be omitted if you're using custom tasks)
+    mainClass = 'NewTask'
+}
+
+task runNewTask(type: JavaExec) {
+    mainClass = 'NewTask'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ["First message"]  // Modify arguments if necessary
+}
+
+task runWorker(type: JavaExec) {
+    mainClass = 'Worker'
+    classpath = sourceSets.main.runtimeClasspath
+}
